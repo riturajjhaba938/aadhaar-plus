@@ -1,104 +1,95 @@
-# Aadhaar Lifecycle Dashboard
+# 🇮🇳 AadhaarPulse: Demographic & Biometric Analytics
 
-A comprehensive, React-based visualization dashboard designed to help policymakers and analysts track the lifecycle of Aadhaar enrolments. This tool provides insights into "Data Decay," mandatory biometric updates, migration trends, and digital readiness across different states in India.
+**AadhaarPulse** is a mission-critical dashboard designed for the **Unique Identification Authority of India (UIDAI)** ecosystem. It provides real-time visibility into Aadhaar enrolments, biometric health scores, and inter-state migration patterns using advanced data visualization and predictive analytics.
 
-![Dashboard Preview](./dashboard_preview.png)
-*(Note: Add a screenshot of the dashboard here if available)*
+---
 
-## 🚀 Key Features
+## 📊 Core Capabilities
 
-* **Real-Time Data Integration**: Automatically fetches and aggregates live sample data from Government Open Data APIs (Demographic, Enrolment, and Biometric datasets).
-* **Dynamic Visualization**: Interactive charts powered by **Recharts** including:
-  * **Enrolment Trends**: Comparative line charts for new enrolments vs. updates.
-  * **Biometric Health**: Composed charts visualizing the gap between expected and actual biometric updates (MBU).
-  * **Migration Map**: Horizontal ba   r charts highlighting states with high address update intensity.
-  * **Digital Readiness**: Stacked bar charts breaking down update types (Mobile vs. Address vs. Biometric).
-* **Interactive Sidebar**: Seamless navigation between Overview, Demographic Insights, Biometric Health, and Migration views.
-* **Global Filtering**: Filter data by Year and State (infrastructure ready).
-* **Responsive Design**: Fully responsive layout optimized for Desktop, Tablet, and Mobile devices using **Tailwind CSS**.
+### 1. **Demographic Intelligence**
 
-## 🛠️ Tech Stack
+* **Enrolment Trending**: Visualizes the daily influx of new enrolments vs. demographic updates.
+* **State-wise Penetration**: Interactive heatmap showing saturation levels across Indian states.
+* **Digital Readiness**: Analysis of mobile number seeding vs. email linkage penetration.
 
-* **Frontend Framework**: [React](https://react.dev/) (v19)
-* **Build Tool**: [Vite](https://vitejs.dev/) (v6)
-* **Styling**: [Tailwind CSS](https://tailwindcss.com/) (v4)
-* **Charts**: [Recharts](https://recharts.org/)
-* **Icons**: [Lucide React](https://lucide.dev/)
-* **Data Handling**: Native Fetch API with custom aggregation logic.
+### 2. **Biometric Health Monitoring**
 
-## 📂 Project Structure
+* **MBU (Mandatory Biometric Update) Tracking**: Monitors the gap between expected and actual biometric updates for age groups 5-7 and 15-17.
+* **Failure Analysis**: Categorizes authentication failures to improved biometric capture standards.
 
-```bash
-src/
-├── components/
-│   ├── Dashboard/       # Chart components (KPICards, EnrolmentTrend, etc.)
-│   ├── Layout/          # App shell (Sidebar, DashboardLayout)
-│   └── UI/              # Reusable UI elements (Card, FilterBar)
-├── data/
-│   └── api.js           # Data service: Fetches public/data.json & aggregates it
-├── lib/
-│   └── utils.js         # Helper functions (Tailwind class merger)
-├── App.jsx              # Main application logic & routing
-└── index.css            # Global styles & Tailwind imports
-```
+### 3. **AI-Powered Forecasting**
 
-## ⚡ Getting Started
+* **Predictive Enrolment**: Uses Linear Regression to forecast enrolment demand for the next 7 days.
+* **Resource Planning**: Helps enrollment centers allocate staff based on predicted footfall.
 
-### Prerequisites
+### 4. **Security & Governance**
 
-* Node.js (v18 or higher)
-* npm
+* **Role-Based Access Control (RBAC)**: Distinct views for Analysts, Managers, and Admins.
+* **Audit Logging**: Immutable logs of all user activities (Login, Profile Updates).
+* **Admin Console**: Centralized user management and role assignment.
 
-### Installation
+---
 
-1. **Clone the repository**
+## 📐 Mathematical Models
 
-    ```bash
-    git clone https://github.com/rishab11250/UDAI.git
-    cd UDAI
-    ```
+The dashboard employs statistical models to derive insights from raw government data.
 
-2. **Install dependencies**
+### **1. Linear Regression (Forecasting)**
 
-    ```bash
-    npm install
-    ```
+To predict future enrolments ($y$) based on time ($x$), we use the least squares method:
 
-### Running the Application
+$$ y = mx + c $$
 
-1. **Fetch Latest Data (ETL Script)**
-    The app uses a static JSON snapshot to avoid CORS issues with the government APIs. To update this snapshot:
+Where:
 
-    ```bash
-    node scripts/fetchData.js
-    ```
+* **$m$ (Slope)**: The rate of growth/decline.
+    $$ m = \frac{n(\sum xy) - (\sum x)(\sum y)}{n(\sum x^2) - (\sum x)^2} $$
+* **$c$ (Intercept)**: The baseline value.
+    $$ c = \frac{\sum y - m(\sum x)}{n} $$
+* **$n$**: Number of historical data points (days).
 
-    *This fetches fresh data from `api.data.gov.in` and saves it to `public/data.json`.*
+This algorithm runs in real-time within `ForecastingChart.jsx` to predict the next week's trend.
 
-2. **Start Development Server**
+### **2. Digital Readiness Score (DRS)**
 
-    ```bash
-    npm run dev
-    ```
+A composite index measuring the digital maturity of a state's user base:
 
-    Open your browser at `http://localhost:5173`.
+$$ DRS = (w_1 \times M_p) + (w_2 \times E_p) + (w_3 \times B_c) $$
 
-## 🔗 Data Sources
+Where:
 
-This dashboard consumes data from the Open Government Data (OGD) Platform India:
+* $M_p$: Mobile Penetration (%)
+* $E_p$: Email Linkage (%)
+* $B_c$: Biometric Completeness (%)
+* Weights: $w_1=0.5, w_2=0.3, w_3=0.2$
 
-1. **Demographic Updates**: `api.data.gov.in/resource/19eac040-0b94-49fa-b239-4f2fd8677d53`
-2. **Aadhaar Enrolment**: `api.data.gov.in/resource/ecd49b12-3084-4521-8f7e-ca8bf72069ba`
-3. **Biometric Updates**: `api.data.gov.in/resource/65454dab-1517-40a3-ac1d-47d4dfe6891c`
+---
 
-## 🤝 Contribution
+## 🛠️ Technology Stack
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+| Component | Technology | Version | Description |
+| :--- | :--- | :--- | :--- |
+| **Frontend** | React | v19 | Component-based UI Architecture |
+| **Build System** | Vite | v6 | Lightning-fast HMR and bundling |
+| **Styling** | Tailwind CSS | v4 | Utility-first CSS engine (Zero runtime) |
+| **Visualization** | Recharts | v2.15 | Composable React charting library |
+| **Backend** | Node.js & Express | v4.18 | RESTful API Layer |
+| **Database** | MongoDB Atlas | v7.0 | Cloud-native document store |
+| **Authentication** | JWT & Bcrypt | v9.0 | Stateless secure authentication |
 
-## 📄 License
+---
 
-Distributed under the MIT License.
+## 🤝 Team Contribution Plan
+
+This project mimics a collaborative Agile workflow.
+
+* **Rishab**: Frontend Architect (Scaffolding, Routing, Styles)
+* **Nikhil**: Backend Lead (API, Database, Auth Logic)
+* **Rituraj**: Security Engineer (Login/Signup Pages, Admin Panel)
+* **Swaraj**: Data Scientist (Charts, AI Models, Data Scripts)
+
+---
+
+## 📜 License
+
+&copy; 2026 AadhaarPulse Team. Licensed under the MIT License.
