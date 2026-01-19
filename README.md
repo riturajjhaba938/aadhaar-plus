@@ -11,7 +11,7 @@ A comprehensive, React-based visualization dashboard designed to help policymake
 * **Dynamic Visualization**: Interactive charts powered by **Recharts** including:
   * **Enrolment Trends**: Comparative line charts for new enrolments vs. updates.
   * **Biometric Health**: Composed charts visualizing the gap between expected and actual biometric updates (MBU).
-  * **Migration Map**: Horizontal bar charts highlighting states with high address update intensity.
+  * **Migration Map**: Horizontal ba   r charts highlighting states with high address update intensity.
   * **Digital Readiness**: Stacked bar charts breaking down update types (Mobile vs. Address vs. Biometric).
 * **Interactive Sidebar**: Seamless navigation between Overview, Demographic Insights, Biometric Health, and Migration views.
 * **Global Filtering**: Filter data by Year and State (infrastructure ready).
