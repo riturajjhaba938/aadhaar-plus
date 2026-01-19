@@ -12,9 +12,10 @@ export function ForecastingChart() {
 
     // 1. Process Historical Data & Calculate Trend
     const { chartData, annualTrend } = useMemo(() => {
-        if (!rawData || rawData.length === 0) return { chartData: [], annualTrend: 0 };
+        if (!rawData || rawData.length === 0) 
+            return { chartData: [], annualTrend: 0 };
 
-        // Aggregate by period
+        // Aggregate by period or Spam
         const historyMap = new Map();
         rawData.forEach(d => {
             if (!d.period) return;
